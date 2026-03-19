@@ -12,7 +12,7 @@ No code. No API. No deployment. Just a markdown file.
 
 | Skill | Description | Link |
 |-------|-------------|------|
-| **SQL Query Explainer** | Paste any SQL → get plain English explanation, performance audit and optimized rewrite | [→ View](./SQL-Query-explainer/) |
+| **SQL Query Explainer** | Paste any SQL → get plain English explanation, performance audit and optimized rewrite | [→ View](./SQL-Query-Explainer/) |
 
 ## How to Use Any Skill
 
