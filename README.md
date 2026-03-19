@@ -1,86 +1,35 @@
-# SQL Query Explainer — Claude Skill
+# Claude Skills
 
-A custom Claude Skill that turns Claude into a senior data engineer reviewing your SQL. Paste any query — get a plain English explanation, performance audit, and optimized rewrite.
+A collection of custom Claude Skills for data engineering and development workflows.
 
-## What It Does
+## What are Claude Skills?
 
-| Feature | Description |
-|---------|-------------|
-| **Plain English Breakdown** | Explains the query step-by-step in execution order (FROM → WHERE → GROUP BY → SELECT) |
-| **Auto Warehouse Detection** | Detects Snowflake, BigQuery, Postgres, Redshift, SQL Server, Oracle, or Spark SQL from dialect clues |
-| **Performance Audit** | Flags hidden cross joins, functions on indexed columns, unnecessary DISTINCT, correlated subqueries |
-| **Correctness Check** | Catches NULL traps, integer division, off-by-one date ranges, missing GROUP BY columns |
-| **Optimized Rewrite** | Rewrites the query with a clear diff summary of what changed and why |
-| **Index Recommendations** | Warehouse-specific suggestions — indexes, clustering keys, partitioning, DISTKEY/SORTKEY |
+Claude Skills are markdown files that define how Claude should handle specific tasks. Upload a `.md` file to Claude's Custom Skills, and it activates automatically based on context.
 
-## How to Use
+No code. No API. No deployment. Just a markdown file.
 
-### 1. Download the Skill
+## Skills
 
-Download the [`SKILL.md`](./SKILL.md) file from this repo.
+| Skill | Description | Link |
+|-------|-------------|------|
+| **SQL Query Explainer** | Paste any SQL → get plain English explanation, performance audit and optimized rewrite | [→ View](./SQL-query-explainer/) |
 
-### 2. Upload to Claude
+## How to Use Any Skill
 
-- Go to [claude.ai](https://claude.ai)
-- Open **Settings** (bottom left)
-- Go to **Profile** → **Custom Skills**
-- Click **Add Skill** → Upload the `SKILL.md` file
-- Done!
+1. Open the skill folder and download the `SKILL.md` file
+2. Go to [claude.ai](https://claude.ai)
+3. Open **Settings** → **Profile** → **Custom Skills**
+4. Click **Add Skill** → upload the `SKILL.md` file
+5. Done — the skill activates automatically when relevant
 
-### 3. Start Using
+## Upcoming Skills
 
-Just paste any SQL query into Claude. The skill activates automatically when it detects SQL.
-
-**Example prompt:**
-```
-Explain and optimize this query:
-
-SELECT c.name, COUNT(o.id), SUM(p.amount)
-FROM customers c, orders o, payments p
-WHERE c.id = o.customer_id
-AND o.id = p.order_id
-AND YEAR(o.created_at) = 2024
-GROUP BY c.name
-HAVING SUM(p.amount) > 1000
-ORDER BY SUM(p.amount) DESC
-```
-
-## Example Output
-
-Claude will return:
-
-1. **🔍 One-Liner** — "This query finds customers who spent over $1000 in 2024, ranked by total spend."
-2. **📖 Step-by-Step** — Execution order walkthrough
-3. **📊 Query Flow** — Visual diagram of table relationships
-4. **⚠️ Issues Found**
-   - 🔴 Implicit joins (comma-separated FROM) — should use explicit JOIN
-   - 🔴 `YEAR(o.created_at)` prevents index usage — should use range filter
-   - 🟡 `SUM(p.amount)` repeated — should use alias
-5. **✅ Optimized Version** — Clean rewrite with CTEs and proper JOINs
-6. **📈 Index Tips** — Specific to your warehouse
-
-## Supported Warehouses
-
-- Snowflake
-- Google BigQuery
-- Amazon Redshift
-- PostgreSQL
-- SQL Server
-- Oracle
-- Hive / Spark SQL
-
-## What is a Claude Skill?
-
-Claude Skills are markdown files that define how Claude should handle specific tasks. Think of them as reusable prompt templates that activate automatically based on context.
-
-No code. No API. Just a `.md` file.
-
-Learn more: [Claude Custom Skills](https://support.anthropic.com)
+- 
 
 ## Contributing
 
-Found a SQL pattern that should be covered? Open an issue or submit a PR to improve the `SKILL.md`.
+Have an idea for a skill? Open an issue or submit a PR.
 
 ## License
 
-MIT — use it however you want.
+MIT
